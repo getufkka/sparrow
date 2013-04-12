@@ -6,7 +6,8 @@ BASHRC=$HOME/.bashrc
 EMACS_VERSION="24.2"
 EMACS_TARBALL=ftp://mirrors.kernel.org/gnu/emacs/emacs-$EMACS_VERSION.tar.gz
 INSTALL="sudo apt-get install -y"
-PACKAGES="ant autoconf automake awesome beanstalkd curl debhelper default-jdk g++ gitk irssi libcppunit-dev libreadline6 libreadline6-dev libtool python-setuptools redis-server rubygems screen strace tcpdump unzip zip zsh"
+OH_MY_ZSH=$HOME/.oh-my-zsh
+PACKAGES="ant autoconf automake awesome beanstalkd curl debhelper default-jdk g++ gitk gnome irssi libcppunit-dev libreadline6 libreadline6-dev libtool python-setuptools redis-server rubygems screen strace tcpdump unzip zip zsh"
 PREFIX=$HOME/prefix
 PROJECTS=$HOME/projects
 TMP=/tmp
@@ -38,6 +39,14 @@ if [ $? -ne 0 ] ; then
     sudo make install
 fi
 
+# === oh-my-zsh ===
+if [ -e $OH_MY_ZSH ] ; then
+    echo "Oh-My-Zshell is already installed"
+else
+    cd $HOME
+    curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+fi
+
 # === prefix ===
 cd $HOME
 echo "Setting up $PREFIX"
@@ -48,7 +57,6 @@ ln -sf $PREFIX/.emacs.d .emacs.d
 ln -sf $PREFIX/.gdbinit .gdbinit
 ln -sf $PREFIX/.gemrc .gemrc
 ln -sf $PREFIX/.gitconfig .gitconfig
-ln -sf $PREFIX/.zshrc .zshrc
 
 # === Leiningen ===
 cd $HOME
@@ -95,4 +103,10 @@ if [ $EXTENDED ] ; then
 fi
 
 # === teardown ===
+
+echo "=========================================================="
+echo "Hey there, you might want to now edit your ~/.zshrc and"
+echo "choose a theme you like. Enjoy!"
+echo "=========================================================="
+
 popd
