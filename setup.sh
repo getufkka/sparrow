@@ -6,33 +6,7 @@ BASHRC=$HOME/.bashrc
 EMACS_VERSION="24.2"
 EMACS_TARBALL=ftp://mirrors.kernel.org/gnu/emacs/emacs-$EMACS_VERSION.tar.gz
 INSTALL="sudo apt-get install -y"
-PACKAGES=(\
-ant \
-autoconf \
-automake \
-awesome \
-beanstalkd \
-bundler \
-curl \
-debhelper \
-default-jdk \
-g++ \
-gitk \
-irssi \
-libcppunit-dev \
-libreadline6 \
-libreadline6-dev \
-libtool \
-python-setuptools \
-python2.6-dev \
-redis-server \
-rubygems \
-screen \
-strace \
-tcpdump \
-unzip \
-zip \
-)
+PACKAGES="ant autoconf automake awesome beanstalkd curl debhelper default-jdk g++ gitk irssi libcppunit-dev libreadline6 libreadline6-dev libtool python-setuptools redis-server rubygems screen strace tcpdump unzip zip zsh"
 PREFIX=$HOME/prefix
 PROJECTS=$HOME/projects
 TMP=/tmp
@@ -64,6 +38,18 @@ if [ $? -ne 0 ] ; then
     sudo make install
 fi
 
+# === prefix ===
+cd $HOME
+echo "Setting up $PREFIX"
+ln -sf $HOME/sparrow $PREFIX
+ln -sf $PREFIX/.bash_aliases .bash_aliases
+ln -sf $PREFIX/.bash_profile .bash_profile
+ln -sf $PREFIX/.emacs.d .emacs.d
+ln -sf $PREFIX/.gdbinit .gdbinit
+ln -sf $PREFIX/.gemrc .gemrc
+ln -sf $PREFIX/.gitconfig .gitconfig
+ln -sf $PREFIX/.zshrc .zshrc
+
 # === Leiningen ===
 cd $HOME
 if [ -e $LEIN_BIN ] ; then
@@ -76,23 +62,6 @@ else
     # run lein once so it can bootstrap itself
     $LEIN_BIN
 fi
-
-# === prefix ===
-cd $HOME
-echo "Setting up $PREFIX"
-git clone git@github.com:gsilk/prefix.git
-cd $PREFIX
-make
-cd $HOME
-ln -sf $PREFIX/.bash_aliases .bash_aliases
-ln -sf $PREFIX/.emacs.d .emacs.d
-ln -sf $PREFIX/.gdbinit .gdbinit
-ln -sf $PREFIX/.gemrc .gemrc
-ln -sf $PREFIX/.gitconfig .gitconfig
-ln -sf $PREFIX/.screenrc .screenrc
-ln -sf $PREFIX/.profile .profile
-ln -sf $PREFIX/.zshrc .zshrc
-
 
 # === extensions ===
 if [ $EXTENDED ] ; then
