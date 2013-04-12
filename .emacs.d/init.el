@@ -183,7 +183,7 @@
 
 (put 'upcase-region 'disabled nil)
 
-(load-file "/home/ersatz/.emacs.d/ext.el")
+(load-file "~/.emacs.d/ext.el")
 
 (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
