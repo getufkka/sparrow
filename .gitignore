@@ -1,0 +1,7 @@
+*~
+.emacs.d/js2-mode/*
+*.svn/*
+bin
+.emacs.d/auto-save-list
+.emacs.d/ac-comphist.dat
+.emacs.d/js2-mode.elc

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: errchk
+# key: errchk
+# --
+function errchk {
+    eval "\${1\}"
+    if [ ! $? -eq 0 ] ; then
+        echo "'\${1\}' failed"
+        exit 1
+    else
+        echo "\${1\}"
+    fi
+}

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: chkfile
+# key: chkfile
+# --
+if [ ! -f $file ]
+then
+    echo "File '${file}' does not exist or is not a regular file"
+    exit 1
+fi

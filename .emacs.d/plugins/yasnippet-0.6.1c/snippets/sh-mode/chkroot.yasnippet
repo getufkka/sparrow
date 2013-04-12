@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: chkroot
+# key: chkroot
+# --
+# exit if not root
+if [ "$UID" -ne "0" ]
+then
+  echo "Must be root to run this script"
+  exit 87
+fi
