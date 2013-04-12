@@ -8,7 +8,7 @@ EMACS_TARBALL=ftp://mirrors.kernel.org/gnu/emacs/emacs-$EMACS_VERSION.tar.gz
 INSTALL="sudo apt-get install -y"
 OH_MY_ZSH=$HOME/.oh-my-zsh
 PACKAGES="ant autoconf automake avahi-daemon awesome beanstalkd curl debhelper default-jdk g++ gitk gnome irssi libcppunit-dev libncurses5 libncurses5-dev libreadline6 libreadline6-dev libtool python-setuptools redis-server rubygems screen strace tcpdump unzip zip zsh"
-PREFIX=$HOME/prefix
+PREFIX=$HOME/sparrow
 PROJECTS=$HOME/projects
 TMP=/tmp
 ZOOKEEPER_VERSION="3.4.3"
@@ -48,7 +48,6 @@ fi
 # === prefix ===
 cd $HOME
 echo "Setting up $PREFIX"
-ln -sf $HOME/sparrow $PREFIX
 ln -sf $PREFIX/.bash_aliases .bash_aliases
 ln -sf $PREFIX/.bash_profile .bash_profile
 ln -sf $PREFIX/.emacs.d .emacs.d
