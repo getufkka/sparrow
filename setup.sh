@@ -18,9 +18,6 @@ export JAVA_HOME=/usr/lib/jvm/java-6-openjdk
 echo "Entering setup..."
 pushd .
 cd $HOME
-BIN_DIR=$PREFIX/bin
-LEIN_BIN=$BIN_DIR/lein
-mkdir -p $BIN_DIR
 mkdir -p $PROJECTS
 
 # === packages ===
@@ -61,6 +58,9 @@ ln -sf $PREFIX/.gitconfig .gitconfig
 
 # === Leiningen ===
 cd $HOME
+BIN_DIR=$PREFIX/bin
+LEIN_BIN=$BIN_DIR/lein
+mkdir -p $BIN_DIR
 if [ -e $LEIN_BIN ] ; then
     echo "Leiningen is already installed to $LEIN_BIN"
 else
