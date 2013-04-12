@@ -24,6 +24,7 @@ mkdir -p $BIN_DIR
 mkdir -p $PROJECTS
 
 # === packages ===
+sudo apt-get update
 $INSTALL $PACKAGES
 
 # === emacs ===
