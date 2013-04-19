@@ -14,62 +14,72 @@ TMP=/tmp
 ZOOKEEPER_VERSION="3.4.3"
 export JAVA_HOME=/usr/lib/jvm/java-6-openjdk
 
-# === setup ===
-echo "Entering setup..."
-pushd .
-cd $HOME
-mkdir -p $PROJECTS
+# # === setup ===
+# echo "Entering setup..."
+# pushd .
+# cd $HOME
+# mkdir -p $PROJECTS
 
-# === packages ===
-sudo apt-get update
-$INSTALL $PACKAGES
+# # === packages ===
+# sudo apt-get update
+# $INSTALL $PACKAGES
 
-# === emacs ===
-echo "Looking for emacs 24..."
-emacs --version | grep "GNU Emacs 24"
-if [ $? -ne 0 ] ; then
-    cd $TMP
-    wget $EMACS_TARBALL
-    tar xzvf emacs-$EMACS_VERSION.tar.gz
-    cd emacs-$EMACS_VERSION
-    ./configure --with-x-toolkit=no --with-xpm=no --with-jpeg=no --with-png=no --with-gif=no --with-tiff=no
-    make
-    sudo make install
-fi
+# # === emacs ===
+# echo "Looking for emacs 24..."
+# emacs --version | grep "GNU Emacs 24"
+# if [ $? -ne 0 ] ; then
+#     cd $TMP
+#     wget $EMACS_TARBALL
+#     tar xzvf emacs-$EMACS_VERSION.tar.gz
+#     cd emacs-$EMACS_VERSION
+#     ./configure --with-x-toolkit=no --with-xpm=no --with-jpeg=no --with-png=no --with-gif=no --with-tiff=no
+#     make
+#     sudo make install
+# fi
 
-# === oh-my-zsh ===
-if [ -e $OH_MY_ZSH ] ; then
-    echo "Oh-My-Zshell is already installed"
-else
-    cd $HOME
-    curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
-fi
+# # === oh-my-zsh ===
+# if [ -e $OH_MY_ZSH ] ; then
+#     echo "Oh-My-Zshell is already installed"
+# else
+#     cd $HOME
+#     curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+# fi
 
-# === prefix ===
-cd $HOME
-echo "Setting up $PREFIX"
-ln -sf $PREFIX/.bash_aliases .bash_aliases
-ln -sf $PREFIX/.bash_profile .bash_profile
-ln -sf $PREFIX/.emacs.d .emacs.d
-ln -sf $PREFIX/.gdbinit .gdbinit
-ln -sf $PREFIX/.gemrc .gemrc
-ln -sf $PREFIX/.gitconfig .gitconfig
+# # === prefix ===
+# cd $HOME
+# echo "Setting up $PREFIX"
+# ln -sf $PREFIX/.bash_aliases .bash_aliases
+# ln -sf $PREFIX/.bash_profile .bash_profile
+# ln -sf $PREFIX/.emacs.d .emacs.d
+# ln -sf $PREFIX/.gdbinit .gdbinit
+# ln -sf $PREFIX/.gemrc .gemrc
+# ln -sf $PREFIX/.gitconfig .gitconfig
 
-# === Leiningen ===
-cd $HOME
-BIN_DIR=$PREFIX/bin
-LEIN_BIN=$BIN_DIR/lein
-mkdir -p $BIN_DIR
-if [ -e $LEIN_BIN ] ; then
-    echo "Leiningen is already installed to $LEIN_BIN"
-else
-    echo "Downloading and installing leiningen to $BIN_DIR"
-    cd $BIN_DIR
-    wget -N -nd http://raw.github.com/technomancy/leiningen/preview/bin/lein
-    chmod 755 lein
-    # run lein once so it can bootstrap itself
-    $LEIN_BIN
-fi
+# # === Leiningen ===
+# cd $HOME
+# BIN_DIR=$PREFIX/bin
+# LEIN_BIN=$BIN_DIR/lein
+# mkdir -p $BIN_DIR
+# if [ -e $LEIN_BIN ] ; then
+#     echo "Leiningen is already installed to $LEIN_BIN"
+# else
+#     echo "Downloading and installing leiningen to $BIN_DIR"
+#     cd $BIN_DIR
+#     wget -N -nd http://raw.github.com/technomancy/leiningen/preview/bin/lein
+#     chmod 755 lein
+#     # run lein once so it can bootstrap itself
+#     $LEIN_BIN
+# fi
+
+# === clojurescript ===
+mkdir -p $HOME/extern
+cd $HOME/extern
+rm -rf clojurescript
+git clone git://github.com/clojure/clojurescript.git
+cd clojurescript
+./script/bootstrap
+echo 'export CLOJURESCRIPT_HOME=$HOME/extern/clojurescript' >> ~/.bash_profile
+echo 'export PATH=$PATH:$CLOJURESCRIPT_HOME/bin' >> ~/.bash_profile
 
 # === extensions ===
 if [ $EXTENDED ] ; then

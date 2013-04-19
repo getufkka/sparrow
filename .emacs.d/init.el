@@ -6,8 +6,8 @@
 (setq-default tab-width 4)
 (setq-default c-basic-offset 4)
 
-;; Automatically load makefile-mode when opening "Makefile"
 (add-to-list 'auto-mode-alist '(".*Makefile\\'" . makefile-mode))
+(add-to-list 'auto-mode-alist '(".*\.cljs\\'" . clojure-mode))
 
 (add-to-list 'load-path "~/.emacs.d")
 (require 'thrift-mode)
