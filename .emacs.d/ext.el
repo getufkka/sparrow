@@ -1,11 +1,11 @@
 ;; switch between template / scss / Backbone view
 (defun controller2template (path)
-  (setq path (replace-regexp-in-string "src/js/desktop/nomic/view" "src/template/desktop" path))
+  (setq path (replace-regexp-in-string "src/js/desktop/nomic/view" "src/template" path))
   (setq path (replace-regexp-in-string ".js$" ".html" path))
   path)
 
 (defun template2scss (path)
-  (setq path (replace-regexp-in-string "src/template/desktop" "src/scss/desktop" path))
+  (setq path (replace-regexp-in-string "src/template" "src/scss/desktop" path))
   (setq path (replace-regexp-in-string ".html$" ".scss" path))
   (setq path (replace-regexp-in-string "/\\([a-z]+\\).scss$" "/_\\1.scss" path))
   path)
@@ -44,7 +44,7 @@
   (find-file path))
 
 (defun find-template (basedir path)
-  (setq path (replace-regexp-in-string "^templates" "src/template/desktop" path))
+  (setq path (replace-regexp-in-string "^template" "src/template" path))
   (setq path (format "%s/%s" basedir path))
   (find-file path))
 
@@ -54,7 +54,7 @@
   (setq path (thing-at-point 'filename))
   (cond ((string-match "^service/" path) (find-model basedir path))
         ((string-match "^view/" path) (find-view basedir path))
-        ((string-match "^templates/" path) (find-template basedir path))
+        ((string-match "^template/" path) (find-template basedir path))
         ((string-match "^sharedLib/" path) (find-shared-lib basedir path))
         (t (message (format "%s: %s" "Failed to locate" path)))
         ))
