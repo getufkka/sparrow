@@ -223,7 +223,7 @@
 
 (makunbound 'ffip-ignored-folders)
 (defvar ffip-ignored-folders
-  '(".git" ".hg" ".bzr" ".svn" "CVS" "dist" "node_modules"))
+  '(".sass-cache" ".git" ".hg" ".bzr" ".svn" "CVS" "dist" "node_modules"))
 
 (defun run-ffip ()
   (interactive)
@@ -245,3 +245,11 @@
         (kill-buffer buffer)
         (message "File '%s' successfully removed" filename)))))
 (global-set-key (kbd "C-c k") 'delete-this-buffer-and-file)
+
+
+(add-to-list 'load-path "~/.emacs.d/multiple-cursors")
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C-<f11>") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<f10>") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-<f12>") 'mc/mark-all-like-this)
