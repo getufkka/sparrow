@@ -118,5 +118,3 @@ echo "=========================================================="
 echo "Hey there, you might want to now edit your ~/.zshrc and"
 echo "choose a theme you like. Enjoy!"
 echo "=========================================================="
-
-popd

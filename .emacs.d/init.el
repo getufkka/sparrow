@@ -3,8 +3,8 @@
 (setq lintnode-autostart t)
 
 (setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-(setq-default c-basic-offset 4)
+(setq-default tab-width 2)
+(setq-default c-basic-offset 2)
 
 (add-to-list 'auto-mode-alist '(".*Makefile\\'" . makefile-mode))
 (add-to-list 'auto-mode-alist '(".*\.cljs\\'" . clojure-mode))
@@ -147,7 +147,8 @@
  '(css-indent-offset 2)
  '(js2-auto-insert-catch-block t)
  '(js2-enter-indents-newline t)
- '(js2-indent-on-enter-key t))
+ '(js2-indent-on-enter-key t)
+ '(sql-postgres-options (quote ("-P 5433" "pager=off"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -166,7 +167,7 @@
 ;; (autoload 'js2-mode "js2-mode" nil t)
 ;; (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
-(setq js-indent-level 2)
+(setq js-indent-level 4)
 
 (setq scss-compile-at-save nil)
 
@@ -190,6 +191,7 @@
 
 (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(setq js2-basic-offset 4)
 
 (autoload 'espresso-mode "espresso")
 
@@ -253,3 +255,11 @@
 (global-set-key (kbd "C-<f11>") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<f10>") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-<f12>") 'mc/mark-all-like-this)
+
+
+(require 'sql)
+(sql-set-product 'postgres)
+
+(require 'puppet-mode)
+(autoload 'puppet-mode "puppet-mode" "Major mode for editing puppet manifests")
+(add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))

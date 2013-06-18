@@ -59,3 +59,17 @@
         (t (message (format "%s: %s" "Failed to locate" path)))
         ))
 (global-set-key (kbd "C-x n d") 'find-thing)
+
+(defun trim-string (string)
+  "Remove white spaces in beginning and ending of STRING.
+White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
+  (replace-regexp-in-string "\\`[ \t\n]*" "" (replace-regexp-in-string "[ \t\n]*\\'" "" string)))
+(defun insert-todo ()
+  (interactive)
+  (insert
+   (concat
+    "//TODO:"
+    (trim-string (shell-command-to-string "date +%Y-%m-%d"))
+    ":gsilk: "
+   )))
+(global-set-key (kbd "C-x n t") 'insert-todo)
