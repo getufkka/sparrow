@@ -72,4 +72,4 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
     (trim-string (shell-command-to-string "date +%Y-%m-%d"))
     ":gsilk: "
    )))
-(global-set-key (kbd "C-x n t") 'insert-todo)
+(global-set-key (kbd "C-x n o") 'insert-todo)
