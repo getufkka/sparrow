@@ -131,6 +131,9 @@ Set up `compilation-exit-message-function' and run `egg-grep-setup-hook'."
     (setq cmd 
 	  (read-string "run git grep (like this) : " cmd)))
 
+    ;; include everything in the project
+    (setq cmd (concat cmd " -- $(git rev-parse --show-cdup) | nawk '{print substr($0,1,300)}'"))
+
      (switch-to-buffer-other-window
     (compilation-start cmd 'egg-grep-mode
 		       `(lambda (name) 
