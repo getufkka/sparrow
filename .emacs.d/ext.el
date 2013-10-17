@@ -73,3 +73,13 @@ White space here is any of: space, tab, emacs newline (line feed, ASCII 10)."
     ":gsilk: "
    )))
 (global-set-key (kbd "C-x n o") 'insert-todo)
+
+(defun egg-grep-thing ()
+  (interactive)
+  (egg-grep 4))
+(global-set-key (kbd "C-x g") 'egg-grep-thing)
+
+(defun egg-grep-sel ()
+  (interactive)
+  (egg-grep 4 (concat "'" (buffer-substring (mark) (point)) "'")))
+(global-set-key (kbd "C-x j") 'egg-grep-sel)
