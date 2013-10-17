@@ -102,7 +102,7 @@ Set up `compilation-exit-message-function' and run `egg-grep-setup-hook'."
        'egg-grep-next-error-function))
 
 ;;;###autoload
-(defun egg-grep (level)
+(defun egg-grep (level &optional interm)
   (interactive "p")
   (let ((git-dir (or (egg-git-dir) 
 		     (error "Dir NOT in a git repo: %s" 
@@ -124,11 +124,16 @@ Set up `compilation-exit-message-function' and run `egg-grep-setup-hook'."
     (when rev
       (setq cmd (concat cmd " " rev)))
 
-    (setq cmd 
-	  (read-string "run git grep (like this) : " cmd))
+    (when interm
+      (setq cmd (concat cmd " " interm)))
 
+    (when (and (not term) (not interm))
+    (setq cmd 
+	  (read-string "run git grep (like this) : " cmd)))
+
+     (switch-to-buffer-other-window
     (compilation-start cmd 'egg-grep-mode
 		       `(lambda (name) 
-			  (format "*git-grep@%s*" ,git-dir)))))
+			  (format "*git-grep@%s*" ,git-dir))))))
 
 ;;; egg-grep.el ends here
