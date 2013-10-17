@@ -26,7 +26,7 @@
 (require 'egg)
 (require 'compile)
 (require 'grep)
-(require 'cl)
+(eval-when-compile (require 'cl))
 
 (defvar egg-grep-saved-find-file-func nil)
 
@@ -83,7 +83,6 @@ Set up `compilation-exit-message-function' and run `egg-grep-setup-hook'."
     (define-key map "{" 'compilation-previous-file)
     (define-key map "}" 'compilation-next-file)
     (define-key map (kbd "TAB") 'compilation-next-error)
-    (define-key map "r" 'egg-grep)
     map)
   "Keymap for git-grep buffers.
 `compilation-minor-mode-map' is the parent keymap.")
@@ -121,15 +120,12 @@ Set up `compilation-exit-message-function' and run `egg-grep-setup-hook'."
       (when term
 	(setq term (symbol-name term))
 	(setq cmd (concat cmd term " "))))
-
+    
     (when rev
       (setq cmd (concat cmd " " rev)))
 
     (setq cmd 
 	  (read-string "run git grep (like this) : " cmd))
-
-    ;; include everything in the project
-    (setq cmd (concat cmd " -- $(git rev-parse --show-cdup) | nawk '{print substr($0,1,300)}'"))
 
     (compilation-start cmd 'egg-grep-mode
 		       `(lambda (name) 
