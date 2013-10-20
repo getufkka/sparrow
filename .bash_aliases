@@ -19,6 +19,8 @@ alias gpl="git pull"
 alias gplr="git pull --rebase"
 alias gpom="git pull origin master"
 alias gpum="git push origin master"
+alias gr="git remote -v"
+alias gs="git status"
 alias gsi="git submodule init"
 alias gsp="git stash pop"
 alias gst="git status"
@@ -77,3 +79,5 @@ fi
 # "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+alias n="cd ~/buildtools && vagrant ssh"
