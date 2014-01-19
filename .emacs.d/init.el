@@ -1,3 +1,17 @@
+;; new
+
+(require 'package)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
+
+(unless (package-installed-p 'clojure-mode)
+  (package-refresh-contents)
+  (package-install 'clojure-mode))
+
+
+;; old
+
 (setq max-lisp-eval-depth 10000)
 (setq debug-on-error t)
 (setq lintnode-autostart t)
@@ -7,7 +21,6 @@
 (setq-default c-basic-offset 2)
 
 (add-to-list 'auto-mode-alist '(".*Makefile\\'" . makefile-mode))
-(add-to-list 'auto-mode-alist '(".*\.cljs\\'" . clojure-mode))
 
 (add-to-list 'load-path "~/.emacs.d")
 (require 'thrift-mode)
@@ -16,13 +29,19 @@
 
 (require 'yaml-mode)
 
+(add-to-list 'load-path "~/.emacs.d/clojure-mode")
+(require 'clojure-mode)
+(add-to-list 'auto-mode-alist '(".*\.cljs\\'" . clojure-mode))
+(add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
+
+(add-to-list 'load-path "~/.emacs.d/midje-mode")
+(require 'midje-mode)
+(add-hook 'clojure-mode-hook 'midje-mode)
+
 ; markdown
 (require 'markdown-mode)
 (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
-
-(add-to-list 'load-path "~/.emacs.d/clojure-mode")
-(require 'clojure-mode)
 
 (add-to-list 'load-path "~/.emacs.d/coffee-mode")
 (require 'coffee-mode)
@@ -252,10 +271,7 @@
 (add-to-list 'load-path "~/.emacs.d/multiple-cursors")
 (require 'multiple-cursors)
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C-<f11>") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<f10>") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-<f12>") 'mc/mark-all-like-this)
-
+(global-set-key (kbd "C-x m") 'mc/mark-all-symbols-like-this)
 
 (require 'sql)
 (sql-set-product 'postgres)
@@ -280,3 +296,44 @@
           (set-visited-file-name new-name)
           (set-buffer-modified-p nil))))))
 (global-set-key (kbd "C-c n") 'rename-file-and-buffer)
+
+(require 'package)
+(add-to-list 'package-archives
+  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
+
+; enable eldoc in Clojure buffers
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+
+; enable whitespace-mode globally for the current emacs session
+; (global-whitespace-mode)
+
+; disable using the dollar sign '$' for newlines, and instead
+; use the more conventional '¶' symbol
+;; (setq whitespace-display-mappings
+;;       ;; all numbers are Unicode codepoint in decimal. try (insert-char 182 ) to see it
+;;       '(
+;;         (space-mark 32 [183] [46]) ; 32 SPACE, 183 MIDDLE DOT 「·」, 46 FULL STOP 「.」
+;;         (newline-mark 10 [182 10]) ; 10 LINE FEED
+;;         (tab-mark 9 [9655 9] [92 9]) ; 9 TAB, 9655 WHITE RIGHT-POINTING TRIANGLE 「▷」
+;;         ))
+
+;; make whitespace-mode use just basic coloring
+;; (setq whitespace-style (quote (face line)))
+
+
+(require 'whitespace)
+(setq-default whitespace-style '(face trailing lines empty indentation::space))
+(setq-default whitespace-line-column 80)
+(setq global-whitespace-mode 1)
+(global-whitespace-mode 1)
+
+(add-to-list 'load-path "~/.emacs.d/helm")
+(require 'helm-config)
+
+(require 'clojure-cheatsheet)
+
+(global-set-key (kbd "<left>") 'windmove-left)
+(global-set-key (kbd "<right>") 'windmove-right)
+(global-set-key (kbd "<up>") 'windmove-up)
+(global-set-key (kbd "<down>") 'windmove-down)
