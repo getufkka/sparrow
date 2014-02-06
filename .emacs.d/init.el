@@ -34,9 +34,9 @@
 (add-to-list 'auto-mode-alist '(".*\.cljs\\'" . clojure-mode))
 (add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
 
-(add-to-list 'load-path "~/.emacs.d/midje-mode")
-(require 'midje-mode)
-(add-hook 'clojure-mode-hook 'midje-mode)
+;; (add-to-list 'load-path "~/.emacs.d/midje-mode")
+;; (require 'midje-mode)
+;; (add-hook 'clojure-mode-hook 'midje-mode)
 
 ; markdown
 (require 'markdown-mode)
@@ -345,3 +345,14 @@
 (add-to-list 'auto-mode-alist '("Makefile\\'" . makefile-mode))
 
 (global-auto-revert-mode)
+
+(global-set-key (kbd "C-c l c") 'clojure-cheatsheet)
+
+(add-to-list 'load-path "~/.emacs.d/midje-mode-master")
+(require 'midje-mode)
+(require 'clojure-jump-to-file)
+
+(defun gs-select-previous-window ()
+  (interactive)
+  (select-window (previous-window)))
+(global-set-key (kbd "C-x i") 'gs-select-previous-window)
