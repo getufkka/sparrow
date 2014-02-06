@@ -3,8 +3,8 @@
   whitespace = error
 
 [user]
-  name =
-  email =
+  name = Gabriel Silk
+  email = gabe@nomic.com
 
 [color]
   branch = auto

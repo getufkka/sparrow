@@ -271,7 +271,11 @@
 (add-to-list 'load-path "~/.emacs.d/multiple-cursors")
 (require 'multiple-cursors)
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C-x m") 'mc/mark-all-symbols-like-this)
+;; (global-set-key (kbd "C-<f11>") 'mc/mark-next-like-this)
+;; (global-set-key (kbd "C-<f10>") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-x r") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-x R") 'mc/mark-all-symbols-like-this)
+(global-set-key (kbd "C-x g") 'egg-grep-thing)
 
 (require 'sql)
 (sql-set-product 'postgres)
@@ -337,3 +341,7 @@
 (global-set-key (kbd "<right>") 'windmove-right)
 (global-set-key (kbd "<up>") 'windmove-up)
 (global-set-key (kbd "<down>") 'windmove-down)
+(add-to-list 'auto-mode-alist '("\\.hbs\\'" . html-mode))
+(add-to-list 'auto-mode-alist '("Makefile\\'" . makefile-mode))
+
+(global-auto-revert-mode)
