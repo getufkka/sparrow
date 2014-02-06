@@ -356,3 +356,5 @@
   (interactive)
   (select-window (previous-window)))
 (global-set-key (kbd "C-x i") 'gs-select-previous-window)
+
+(require 'web-mode)
